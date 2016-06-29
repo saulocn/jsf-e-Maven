@@ -1,24 +1,18 @@
 package br.com.caelum.livraria.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.springframework.stereotype.Controller;
 
-import br.com.caelum.livraria.dao.LivroDao;
 import br.com.caelum.livraria.dao.VendasDao;
-import br.com.caelum.livraria.modelo.Livro;
 import br.com.caelum.livraria.modelo.Venda;
 
-@Named
-@ViewScoped
+@Controller
 public class VendasBean implements Serializable{
 
 	/**

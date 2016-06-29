@@ -2,11 +2,9 @@ package br.com.caelum.livraria.bean;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import org.springframework.stereotype.Controller;
 
-@Named
-@SessionScoped
+@Controller
 public class TemaBean implements Serializable {
 
 	/**

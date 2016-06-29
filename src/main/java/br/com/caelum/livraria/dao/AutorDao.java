@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
 
 import br.com.caelum.livraria.modelo.Autor;
 
+@Repository
 public class AutorDao implements Serializable{
 	
 	/**
@@ -16,7 +19,7 @@ public class AutorDao implements Serializable{
 	 */
 	private static final long serialVersionUID = 6632998577929529227L;
 
-	@Inject
+	@PersistenceContext
 	EntityManager em;
 
 	private DAO<Autor> dao;

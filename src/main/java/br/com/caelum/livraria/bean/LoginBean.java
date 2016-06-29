@@ -8,11 +8,12 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.stereotype.Controller;
+
 import br.com.caelum.livraria.dao.UsuarioDao;
 import br.com.caelum.livraria.modelo.Usuario;
 
-@Named
-@ViewScoped
+@Controller
 public class LoginBean implements Serializable {
 
 	/**
@@ -24,8 +25,6 @@ public class LoginBean implements Serializable {
 	@Inject
 	private UsuarioDao usuarioDao;
 	
-	@Inject
-	private FacesContext context;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -35,18 +34,18 @@ public class LoginBean implements Serializable {
 		System.out.println("fazendo login do usuario " + this.usuario.getLogin());
 		boolean existe = this.usuarioDao.existe(this.usuario);
 		if (existe) {
-			context.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
 			return "livro?faces-redirect=true";
 		}
 
-		context.getExternalContext().getFlash().setKeepMessages(true);
-		context.addMessage(null, new FacesMessage("Usuário não encontrado"));
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário não encontrado"));
 
 		return "login?faces-redirect=true";
 	}
 
 	public String deslogar() {
-		context.getExternalContext().getSessionMap().remove("usuarioLogado");
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuarioLogado");
 		return "login?faces-redirect=true";
 	}
 }

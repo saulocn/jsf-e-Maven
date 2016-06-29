@@ -9,19 +9,18 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.caelum.livraria.dao.AutorDao;
 import br.com.caelum.livraria.dao.LivroDao;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
 import br.com.caelum.livraria.modelo.LivroDataModel;
-import br.com.caelum.livraria.tx.Transactional;
 
-@Named
-@ViewScoped
+@Controller
 public class LivroBean implements Serializable {
 
 	/**
@@ -44,9 +43,6 @@ public class LivroBean implements Serializable {
 	@Inject
 	private AutorDao autorDao;
 	
-
-	@Inject
-	private FacesContext context;
 	
 	
 
@@ -107,7 +103,7 @@ public class LivroBean implements Serializable {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
 
 		if (livro.getAutores().isEmpty()) {
-			context.addMessage("autor",
+			FacesContext.getCurrentInstance().addMessage("autor",
 					new FacesMessage("Livro deve ter pelo menos um Autor."));
 			return;
 		}

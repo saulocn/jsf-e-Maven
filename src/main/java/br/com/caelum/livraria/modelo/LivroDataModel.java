@@ -5,16 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
+import org.springframework.stereotype.Component;
 
 import br.com.caelum.livraria.dao.LivroDao;
 
-
-@RequestScoped
+@Component
 public class LivroDataModel extends LazyDataModel<Livro> {
 	/**
 	 * 
@@ -28,7 +27,7 @@ public class LivroDataModel extends LazyDataModel<Livro> {
 	void init() {
 		super.setRowCount(this.livroDao.quantidadeDeElementos());
 	}
-	
+
 	@Override
 	public List<Livro> load(int inicio, int quantidade, String sortField, SortOrder sortOrder,
 			Map<String, Object> filtros) {

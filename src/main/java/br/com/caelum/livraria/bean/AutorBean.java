@@ -3,17 +3,16 @@ package br.com.caelum.livraria.bean;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.caelum.livraria.dao.AutorDao;
 import br.com.caelum.livraria.modelo.Autor;
-import br.com.caelum.livraria.tx.Transactional;
 
-@Named
-@ViewScoped
-public class AutorBean implements Serializable{
+@Controller
+public class AutorBean implements Serializable {
 
 	/**
 	 * 
@@ -21,12 +20,12 @@ public class AutorBean implements Serializable{
 	private static final long serialVersionUID = -8864576577481472949L;
 
 	private Autor autor = new Autor();
-	
+
 	private Integer autorId;
-	
+
 	@Inject
 	private AutorDao autorDao;
-	
+
 	public Integer getAutorId() {
 		return autorId;
 	}
@@ -34,16 +33,16 @@ public class AutorBean implements Serializable{
 	public void setAutorId(Integer autorId) {
 		this.autorId = autorId;
 	}
-	
+
 	public void carregarAutorPelaId() {
 		this.autor = this.autorDao.buscaPorId(autorId);
 	}
-	
+
 	@Transactional
 	public String gravar() {
 		System.out.println("Gravando autor " + this.autor.getNome());
 
-		if(this.autor.getId() == null) {
+		if (this.autor.getId() == null) {
 			this.autorDao.adiciona(this.autor);
 		} else {
 			this.autorDao.atualiza(this.autor);
@@ -53,17 +52,17 @@ public class AutorBean implements Serializable{
 
 		return "autor?faces-redirect=true";
 	}
-	
+
 	@Transactional
 	public void remover(Autor autor) {
 		System.out.println("Removendo autor " + autor.getNome());
 		this.autorDao.remove(autor);
 	}
-	
+
 	public List<Autor> getAutores() {
 		return this.autorDao.listaTodos();
 	}
-	
+
 	public Autor getAutor() {
 		return autor;
 	}

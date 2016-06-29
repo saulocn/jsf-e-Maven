@@ -4,21 +4,23 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.primefaces.model.SortOrder;
+import org.springframework.stereotype.Repository;
 
 import br.com.caelum.livraria.modelo.Livro;
 import br.com.caelum.livraria.modelo.Parametro;
 
+@Repository
 public class LivroDao implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -614145449017641172L;
 
-	@Inject
+	@PersistenceContext
 	EntityManager em;
 
 	private DAO<Livro> dao;

@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
 
 import br.com.caelum.livraria.modelo.Venda;
 
+@Repository
 public class VendasDao implements Serializable {
 
 	/**
@@ -18,7 +21,7 @@ public class VendasDao implements Serializable {
 
 	private DAO<Venda> dao;
 
-	@Inject
+	@PersistenceContext
 	private EntityManager em;
 
 	@PostConstruct
